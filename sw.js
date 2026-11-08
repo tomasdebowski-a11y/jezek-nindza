@@ -1,5 +1,5 @@
 // Offline support: network first for the game's own files, cache first for fonts.
-const VERSION = 'jezek-v1';
+const VERSION = 'jezek-v2';
 const SHELL = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest',
   'js/game.js', 'js/audio.js', 'js/worlds.js', 'js/hero.js', 'js/util.js', 'js/storage.js',

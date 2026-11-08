@@ -467,7 +467,10 @@ document.addEventListener('keydown', e => {
 });
 
 ['touchstart', 'touchend', 'click', 'pointerdown'].forEach(ev => document.addEventListener(ev, () => sound.init(), { capture: true, passive: true }));
-document.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
+document.addEventListener('touchmove', e => {
+  if (e.target.closest && e.target.closest('.world-list')) return; // let the world list scroll
+  e.preventDefault();
+}, { passive: false });
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 document.addEventListener('visibilitychange', () => {
@@ -539,7 +542,23 @@ function buildSelect() {
   }
 }
 
-$('btnPlay').addEventListener('click', () => { sound.click(); buildSelect(); G.state = 'select'; show('select'); });
+$('btnPlay').addEventListener('click', () => { sound.click(); buildSelect(); G.state = 'select'; show('select'); requestAnimationFrame(updateArrows); });
+function scrollWorlds(dir) {
+  const list = $('worldList');
+  const card = list.querySelector('.card');
+  const step = card ? card.offsetWidth + 12 : 200;
+  list.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+function updateArrows() {
+  const list = $('worldList');
+  $('btnPrev').disabled = list.scrollLeft <= 2;
+  $('btnNextW').disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 2;
+}
+$('btnPrev').addEventListener('click', () => { sound.click(); scrollWorlds(-1); });
+$('btnNextW').addEventListener('click', () => { sound.click(); scrollWorlds(1); });
+$('worldList').addEventListener('scroll', updateArrows, { passive: true });
+window.addEventListener('resize', () => { if (G.state === 'select') updateArrows(); });
+
 $('btnBack').addEventListener('click', () => { sound.click(); G.state = 'title'; show('title'); });
 $('btnMode').addEventListener('click', () => { G.mode = G.mode === 'A' ? 'B' : 'A'; data.mode = G.mode; save(data); sound.click(); refreshTitle(); });
 $('btnMusic').addEventListener('click', () => { sound.setMusic(!sound.musicOn); data.music = sound.musicOn; save(data); sound.click(); refreshTitle(); });

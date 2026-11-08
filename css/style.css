@@ -25,7 +25,6 @@ html, body {
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
-  touch-action: none;
 }
 [hidden] { display: none !important; }
 
@@ -115,8 +114,21 @@ html, body {
 }
 .select-head { display: flex; align-items: center; gap: 14px; }
 .select-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 24px; }
+.world-wrap { flex: 1; min-height: 0; display: flex; align-items: center; gap: 8px; }
+.arrow {
+  flex: 0 0 auto;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid rgba(255, 246, 227, .4);
+  background: rgba(21, 24, 38, .7);
+  display: grid; place-items: center;
+  cursor: pointer; touch-action: manipulation;
+}
+.arrow svg { width: 22px; height: 22px; fill: none; stroke: var(--paper); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.arrow:disabled { opacity: .25; cursor: default; }
+.arrow:active:not(:disabled) { transform: scale(.94); }
+.arrow:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
 .world-list {
-  flex: 1; min-height: 0;
+  flex: 1; min-width: 0; height: 100%;
   display: flex; gap: 12px; align-items: center;
   overflow-x: auto; overflow-y: hidden;
   scroll-snap-type: x mandatory;
