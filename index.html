@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Ježek Nindža</title>
+<meta name="description" content="Bodlík, nindža ježek, chytá padající poklady v šesti světech.">
+<meta name="theme-color" content="#151826">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ježek Nindža">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="game" aria-label="Herní plocha"></canvas>
+<div id="safe" aria-hidden="true"></div>
+
+<button id="btnPause" class="icon-btn" aria-label="Pauza" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg>
+</button>
+
+<section id="title" class="screen title-screen">
+  <div class="title-col">
+    <p class="eyebrow">Bodlík a padající poklady</p>
+    <h1 class="logo"><span>Ježek</span><span class="logo-2">Nindža</span></h1>
+    <button id="btnPlay" class="btn primary">Hrát</button>
+    <div class="row">
+      <button id="btnMode" class="btn small">Obtížnost: lehká</button>
+      <button id="btnMusic" class="btn small">Hudba: zap</button>
+      <button id="btnSound" class="btn small">Zvuky: zap</button>
+    </div>
+    <p id="bestLine" class="best">Rekord: 0</p>
+  </div>
+</section>
+
+<section id="select" class="screen select-screen" hidden>
+  <header class="select-head">
+    <button id="btnBack" class="btn small">Zpět</button>
+    <h2>Vyber svět</h2>
+  </header>
+  <div id="worldList" class="world-list"></div>
+</section>
+
+<section id="pause" class="screen modal" hidden>
+  <div class="panel">
+    <h2>Pauza</h2>
+    <button id="btnResume" class="btn primary">Pokračovat</button>
+    <div class="row">
+      <button id="btnRestart" class="btn small">Znovu</button>
+      <button id="btnQuit" class="btn small">Menu</button>
+    </div>
+  </div>
+</section>
+
+<section id="clear" class="screen modal" hidden>
+  <div class="panel">
+    <h2 id="clearTitle">Svět dokončen!</h2>
+    <p id="clearStats" class="stats"></p>
+    <p id="clearNote" class="note">Bonus: +1 život</p>
+    <button id="btnNext" class="btn primary">Další svět</button>
+    <button id="btnClearMenu" class="btn small">Menu</button>
+  </div>
+</section>
+
+<section id="over" class="screen modal" hidden>
+  <div class="panel">
+    <h2 id="overTitle">Konec hry</h2>
+    <p id="overStats" class="stats"></p>
+    <button id="btnRetry" class="btn primary">Zkusit znovu</button>
+    <button id="btnOverMenu" class="btn small">Menu</button>
+  </div>
+</section>
+
+<section id="win" class="screen modal" hidden>
+  <div class="panel">
+    <h2>Havran poražen!</h2>
+    <p id="winStats" class="stats"></p>
+    <p class="note">Odemkl jsi nekonečný režim.</p>
+    <button id="btnEndless" class="btn primary">Nekonečný režim</button>
+    <button id="btnWinMenu" class="btn small">Menu</button>
+  </div>
+</section>
+
+<div id="rotate" class="rotate" hidden>
+  <div class="phone" aria-hidden="true"></div>
+  <p>Otoč telefon na šířku</p>
+</div>
+
+<script type="module" src="js/game.js"></script>
+</body>
+</html>
